@@ -75,8 +75,8 @@ def load_data(
     if stocks_type == '':
         data = adjust_by_splits(data, False)
     data = data.transpose(*dims)
-    if forward_order:
-        data = data.sel(**{ds.TIME: slice(None, None, -1)})
+    #if forward_order:
+    #    data = data.sel(**{ds.TIME: slice(None, None, -1)})
     data.name = "stocks_nasdaq100" if stocks_type.lower() in ["nasdaq100", "ndx100"] else "stocks"
     return data
 
@@ -109,6 +109,7 @@ def adjust_by_splits(data, make_copy=True):
     data.loc[f.CLOSE] = data.loc[f.CLOSE] * data.loc[f.SPLIT_CUMPROD]
     data.loc[f.VOL] = data.loc[f.VOL] / data.loc[f.SPLIT_CUMPROD]
     data.loc[f.DIVS] = data.loc[f.DIVS] * data.loc[f.SPLIT_CUMPROD]
+    data = data.sortby('time', ascending=False)    
     return data.transpose(*dims)
 
 
