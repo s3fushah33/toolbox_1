@@ -9,7 +9,7 @@ setup(
     package_data={'qnt': ['*.ipynb']},
     install_requires=[
         'scipy>=1.11.3',
-        'pandas==1.2.5',
+        #'pandas==1.2.5',
         'xarray==0.20.2',
         'numpy==1.23.5',
         'tabulate>=0.9.0',
