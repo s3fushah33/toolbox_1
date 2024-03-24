@@ -99,6 +99,8 @@ def adjust_by_splits(data, make_copy=True):
     """
     if make_copy:
         data = data.copy()
+
+    data = data.sortby('time', ascending=True)
     dims = data.dims
     data = data.transpose(ds.FIELD, ds.TIME, ds.ASSET)
     data.loc[f.OPEN] = data.loc[f.OPEN] * data.loc[f.SPLIT_CUMPROD]
